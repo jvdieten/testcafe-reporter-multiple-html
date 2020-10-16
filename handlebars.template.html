@@ -1,0 +1,254 @@
+<html>
+<head>
+  <title>TestCafe HTML report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+          integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.1.2/sprintf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/flexibility@2.0.1/flexibility.js"></script>
+  <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/themes/bootstrap-table/bootstrap-table.min.css"
+        rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/themes/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table-vue.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- fonts -->
+  <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Open+Sans:400,700">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amiko">
+  <script src="https://use.fontawesome.com/3da8cb1b18.js"></script>
+
+  <!-- charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Status', 'Test items'],
+        ['Passed', {{info.passed}}],
+        ['Skipped',{{info.skipped}}],
+        ['Failed', {{info.failed}}],
+      ]);
+
+      var options = {
+        slices: { 0: { color: 'green' }, 1: { color: 'orange' }, 2: { color: 'red' } },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body style="font-family: 'Amiko', sans-serif">
+<div class="container-fluid">
+  <nav class="navbar navbar-default">
+    <span class="navbar-brand mb-0 h1">TestCafe HTML report</span>
+  </nav>
+  <div class="row">
+    <div class="col-sm-3 col-md-6">
+      <div class="panel panel-default" style="height: 300px">
+        <div class="panel-heading" style="font-weight: bold">Run info</div>
+        <div class="panel-body">
+          <br/>
+          <table>
+            <tbody class="quick-list">
+            <tr>
+              <td style="width: 200px; font-weight: bold">Project</td>
+              <td style="width: 50%">{{info.appName}}</td>
+            </tr>
+            <tr>
+              <td style="width: 200px; font-weight: bold">Version</td>
+              <td style="width: 50%">{{info.appVersion}}</td>
+            </tr>
+            <tr>
+              <td style="width: 200px; font-weight: bold">Total browsers</td>
+              <td style="width: 50%">{{info.browserCount}}</td>
+            </tr>
+            <tr>
+              <td style="width: 200px; font-weight: bold">Total tests</td>
+              <td style="width: 50%">{{info.testCount}}</td>
+            </tr>
+            <tr>
+              <td style="width: 200px; font-weight: bold">Execution Start Time</td>
+              <td style="width: 50%">{{info.startTime}}</td>
+            </tr>
+
+            <tr>
+              <td style="width: 200px; font-weight: bold">Execution End Time</td>
+              <td style="width: 50%">{{info.endTime}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-6">
+      <div class="panel panel-default" style="height: 300px">
+        <div class="panel-heading" style="font-weight: bold">Tests</div>
+        <div class="panel-body">
+          <div id="piechart" style="height: 220px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="table">
+    <bootstrap-table :columns="columns" :data="data" :options="options"></bootstrap-table>
+  </div>
+  <div style="display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              position: fixed;
+              bottom: 0;
+              width: 100vw;
+              min-height: 4vh;">
+    Created by jvdieten &nbsp;
+    <a href="http://www.testassured.nl/" target="_blank"><i class="fa fa-rss-square fa-2x"></i></a> &nbsp;
+    <a href="https://github.com/jvdieten/" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>  &nbsp;
+    <a href="http://nl.linkedin.com/in/joostvandieten" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+  </div>
+</div>
+
+</body>
+<script>
+  $(function() {
+    new Vue({
+      el: '#table',
+      components: {
+        'BootstrapTable': BootstrapTable,
+      },
+      data: {
+        columns: [
+          {
+            title: 'Fixture',
+            field: 'fixtureName',
+            sortable: true,
+          },
+          {
+            field: 'testName',
+            title: 'Test',
+            sortable: true,
+          },
+          {
+            field: 'status',
+            formatter: function (status) {
+              if (status === 'passed'){
+                return '<i style="color: green" class="fas fa-check"></i> &nbsp; passed'
+              } else if (status === 'failed'){
+                return '<i style="color: red" class="fas fa-times"></i> &nbsp; failed'
+              } else if (status === 'skipped'){
+                return '<i style="color: orange" class="fas fa-forward"></i> &nbsp; skipped'
+              }
+            },
+            title: 'Status',
+            sortable: true,
+          },
+          {
+            field: 'browser',
+            formatter: function (browser) {
+              if (browser.toLowerCase().indexOf('firefox') > -1){
+                return '<i class="fab fa-firefox-browser"></i> &nbsp;' + browser;
+              } else if (browser.toLowerCase().indexOf('chrome') > -1){
+                return '<i class="fab fa-chrome"></i> &nbsp;' + browser;
+              } else if (browser.toLowerCase().indexOf('safari') > -1){
+                return '<i class="fab fa-safari"></i> &nbsp;' + browser;
+              } else if (browser.toLowerCase().indexOf('edge') > -1){
+                return '<i class="fab fa-edge"></i> &nbsp;' + browser;
+              } else if (browser.toLowerCase().indexOf('explorer') > -1){
+                return '<i class="fab fa-internet-explorer"></i> &nbsp;' + browser;
+              } else {
+                return browser;
+              }
+            },
+            title: 'Browser',
+            sortable: true,
+          },
+          {
+            field: 'platform',
+            title: 'Platform',
+            formatter: function (platform) {
+              if (platform.toLowerCase().indexOf('mac') > -1){
+                return '<i class="fab fa-apple"></i> &nbsp;' + platform;
+              } else if (platform.toLowerCase().indexOf('win') > -1){
+                return '<i class="fab fa-windows"></i> &nbsp;' + platform;
+              } else if (platform.toLowerCase().indexOf('linux') > -1){
+                return '<i class="fab fa-linux"></i> &nbsp;' + platform;
+              } else {
+                return platform;
+              }
+            },
+            sortable: true,
+          },
+          {
+            field: 'device',
+            title: 'Device',
+            sortable: true,
+          }
+        ],
+        data: [
+          {{#each items as |item|}}
+            {
+              "fixtureName": '{{item.fixtureName}}',
+              "testName": '{{item.testName}}',
+              "status": '{{item.status}}',
+              "browser": '{{item.browser}}',
+              "platform": '{{item.platform}}',
+              "device": '{{item.device}}',
+              "screenshots": '{{item.screenshotPaths}}',
+              "error": '{{item.error}}'
+            },
+          {{/each}}
+        ],
+        options: {
+          search: true,
+          detailView: true,
+          showColumns: true,
+          onExpandRow: function(index, row, $detail) {
+            expandRow(index, row);
+          },
+        },
+      },
+    });
+  });
+
+  function expandRow(index, row) {
+    const tRow = document.querySelector(`tr[data-index="${index}"]`);
+    const errorDiv = document.createElement('div');
+    const br = document.createElement('br');
+
+    errorDiv.style.setProperty('padding-top', '5px');
+
+    errorDiv.style.setProperty('padding-left', '5%');
+    errorDiv.style.setProperty('font-size', 'small');
+
+    errorDiv.insertAdjacentHTML('afterbegin', decodeURI(row.error));
+    tRow.nextElementSibling.lastChild.appendChild(errorDiv);
+    tRow.nextElementSibling.lastChild.appendChild(br);
+
+    const screenshots = row.screenshots.split(',')
+    if (screenshots && screenshots[0] !== '') {
+      for (let i=0; i<screenshots.length; i++){
+        const imgDiv = document.createElement('img');
+        imgDiv.style.setProperty('padding-left', '5%');
+        imgDiv.style.setProperty('max-width', '800px');
+        imgDiv.src = './..'+screenshots[i];
+        tRow.nextElementSibling.lastChild.appendChild(imgDiv);
+      }
+    }
+  }
+
+</script>
+</html>

@@ -1,0 +1,32 @@
+# Screenshots
+screenshots
+
+#build
+build
+lib
+.idea
+.DS_Store
+
+# npm package files
+*.tgz
+build/
+package/
+coverage/
+
+# tests
+tests/
+reports/
+multiple-html/
+
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Typescript v1 declaration files
+typings/
+
+testcafe-reporter-multiple-html.json

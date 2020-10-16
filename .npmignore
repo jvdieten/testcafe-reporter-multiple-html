@@ -1,0 +1,6 @@
+*
+!bin/**/*
+!lib/**/*
+lib/**/*.test.*
+!package.json
+!*.md

@@ -1,0 +1,15 @@
+import { defaultOptions, ReporterOption } from './default-options';
+import { fileExists, jsonFrom, writeJsonFileSync } from './fs';
+
+export const defaultConfigurationFilePath = 'testcafe-reporter-multiple-html.json';
+const ensureConfigFileExists = (filepath: string) => {
+  if (fileExists(filepath)) {
+    return;
+  }
+  writeJsonFileSync(defaultOptions, defaultConfigurationFilePath);
+};
+
+ensureConfigFileExists(defaultConfigurationFilePath);
+const defaultConfig = jsonFrom(defaultConfigurationFilePath) as ReporterOption;
+
+export const options = defaultConfig;
