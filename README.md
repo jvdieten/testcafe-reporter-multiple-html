@@ -87,6 +87,6 @@ or add/edit the `args` section inside the `testcafe-reporter-multiple-html.json`
 - this reporter will report the error in the extended details of a report row
 
 <p align="center">
-  <img width="400" src="media/error-screenshot.pn">
+  <img width="400" src="media/error-screenshot.png">
 </p>
 
