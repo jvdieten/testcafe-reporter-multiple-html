@@ -6,6 +6,7 @@ build
 lib
 .idea
 .DS_Store
+.report
 
 # npm package files
 *.tgz

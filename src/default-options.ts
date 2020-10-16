@@ -7,6 +7,6 @@ export const defaultOptions: ReporterOption = {
   args: {
     appName: false,
     appVersion: false,
-    reportFolder: 'multiple-html',
+    reportFolder: '.report',
   },
 };
