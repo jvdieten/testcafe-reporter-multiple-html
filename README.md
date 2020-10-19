@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/testcafe-reporter-multiple-html.png)](https://nodei.co/npm/testcafe-reporter-multiple-html/)
+
 # TestCafé Reporter Multiple Html
 
 This is the **HTML** reporter plugin for [TestCafé](http://devexpress.github.io/testcafe). 
