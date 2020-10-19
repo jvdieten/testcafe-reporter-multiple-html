@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-multiple-html",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Testcafe HTML reporter plugin.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
