@@ -123,7 +123,7 @@ export class MultipleHtmlReport {
 
       const screenshots = testRunInfo.screenshots
         .filter((s) => s.testRunId === browserResult.testRunId)
-        .map((s) => s.screenshotPath.replace(__dirname, ''));
+        .map((s) => s.screenshotPath.replace(process.cwd(), ''));
 
       const userAgent: string[] = browserResult.prettyUserAgent.split('/');
       let browser: string;
